@@ -16,8 +16,12 @@ client.on("ready", () => {
 });
 
 client.on("message", (msg) => {
-  if (StringUtil.isTranscriptionContains(msg.content, locale.hi)) {
-    msg.reply("hey!");
+  function hey(transcription, words) {
+    return words.includes(transcription) > 0;
+  }
+
+  if (hey(msg.content, locale.hi)) {
+    msg.channel.send("hey!");
   }
 });
 
@@ -31,7 +35,7 @@ client.on("message", (msg) => {
     command = msg.content.split(" ")[1];
     console.log(command);
 
-    msg.reply(command + "command");
+    msg.channel.send(command + "command");
   }
 });
 
