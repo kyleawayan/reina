@@ -27,8 +27,11 @@ client.on("message", (msg) => {
     // make a better way to handle commands: ex. if the message is "reina play", then take the second word (play)
     // and look for the existing js file in /things/
     // so since it's play, it would execute stuff in play.js
+    var command = [];
+    command = msg.content.split(" ")[1];
+    console.log(command);
 
-    msg.reply("playing music!" + msg.content);
+    msg.reply(command + "command");
   }
 });
 
