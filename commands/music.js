@@ -10,17 +10,16 @@ module.exports = {
   description: "play music",
   execute(message, args) {
     var connection;
-      async function test() {
-        if (message.member.voice.channel) {
-          connection = await message.member.voice.channel.join();
-          music()
-        } else {
-          message.channel.send(`you need to join a voice channel`);
-        }
+    async function test() {
+      if (message.member.voice.channel) {
+        connection = await message.member.voice.channel.join();
+        music();
+      } else {
+        message.channel.send(`you need to join a voice channel`);
+      }
+    } test();
+
     
-    }
-    
-    test();;
     async function music() {
       message.channel.startTyping();
       const r = await yts(args.slice(0, 999).join(" "));
@@ -46,14 +45,12 @@ module.exports = {
         play();
       });
 
-      video.pipe(fs.createWriteStream(`commands/${videos[0].videoId}.webm`));
+      video.pipe(fs.createWriteStream(`commands/${videos[0].videoId}.webm`))
 
       async function play() {
-            message.channel.stopTyping();
-            message.channel.send(
-              `playing ${videos[0].title} \n${videos[0].url}`
-            );
-            connection.play(`commands/${videos[0].videoId}.webm`);
+        message.channel.stopTyping();
+        message.channel.send(`playing ${videos[0].title} \n${videos[0].url}`);
+        connection.play(`commands/${videos[0].videoId}.webm`);
       }
     }
   },
