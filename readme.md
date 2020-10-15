@@ -1,6 +1,6 @@
 # reina
 
-![banner](https://kylan.s3-us-west-1.amazonaws.com/projects/reina.jpg)
+![banner](https://kylan.s3-us-west-1.amazonaws.com/projects/reinabanner.png)
 <p align="center">
     a minimal <a href="https://www.npmjs.com/package/discord.js">discord.js</a> bot ✨
 </p>
