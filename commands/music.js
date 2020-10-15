@@ -10,6 +10,7 @@ module.exports = {
   description: "play music",
   execute(message, args) {
   async function music() {
+    message.channel.startTyping();
     const r = await yts(args.slice(0, 999).join(" "));
     const videos = r.videos.slice(0, 3);
     const url = await videos[0].url; // [0] is result number, prolly add somewhere to select this later. this console log returns url
@@ -17,17 +18,19 @@ module.exports = {
     const video = youtubedl(
       url,
       // Optional arguments passed to youtube-dl.
-      ["--format=251"],
+      ["--format=bestaudio"],
       // Additional options can be given for calling `child_process.execFile()`.
       { cwd: __dirname }
     );
 
-    const spinner = ora(`downloading ${videos[0].title}!`).start();
+    const spinner = ora({
+      text: `downloading ${videos[0].title}`,
+      color: "red",
+    }).start();
 
     // Will be called when the download starts.
     video.on("info", function (info) {
-      spinner.color = "red";
-      spinner.succeed(`downloaded ${videos[0].title}!`);
+      spinner.stop();
       play();
     });
 
@@ -36,6 +39,8 @@ module.exports = {
     async function play() {
       if (message.member.voice.channel) {
         const connection = await message.member.voice.channel.join();
+        message.channel.stopTyping();
+        message.channel.send(`playing ${videos[0].title} \n${videos[0].url}`);
         connection.play(`commands/${videos[0].videoId}.webm`);
       }
     }

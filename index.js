@@ -7,11 +7,13 @@ const ora = require("ora");
 
 const fs = require("fs");
 client.commands = new Discord.Collection();
-const spinner = ora("loading commands").start();
+const spinner = ora({
+  text: `loading commands`,
+  color: "red",
+}).start();
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
-spinner.color = "red";
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.name, command);
