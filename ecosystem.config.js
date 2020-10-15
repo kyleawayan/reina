@@ -3,7 +3,6 @@ module.exports = {
     {
       name: "reina",
       script: "index.js",
-      watch: ".",
     },
   ],
 
