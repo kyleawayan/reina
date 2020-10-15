@@ -9,42 +9,52 @@ module.exports = {
   name: "play",
   description: "play music",
   execute(message, args) {
-  async function music() {
-    message.channel.startTyping();
-    const r = await yts(args.slice(0, 999).join(" "));
-    const videos = r.videos.slice(0, 3);
-    const url = await videos[0].url; // [0] is result number, prolly add somewhere to select this later. this console log returns url
+    var connection;
+      async function test() {
+        if (message.member.voice.channel) {
+          connection = await message.member.voice.channel.join();
+          music()
+        } else {
+          message.channel.send(`you need to join a voice channel`);
+        }
+    
+    }
+    
+    test();;
+    async function music() {
+      message.channel.startTyping();
+      const r = await yts(args.slice(0, 999).join(" "));
+      const videos = r.videos.slice(0, 3);
+      const url = await videos[0].url; // [0] is result number, prolly add somewhere to select this later. this console log returns url
 
-    const video = youtubedl(
-      url,
-      // Optional arguments passed to youtube-dl.
-      ["--format=bestaudio"],
-      // Additional options can be given for calling `child_process.execFile()`.
-      { cwd: __dirname }
-    );
+      const video = youtubedl(
+        url,
+        // Optional arguments passed to youtube-dl.
+        ["--format=bestaudio"],
+        // Additional options can be given for calling `child_process.execFile()`.
+        { cwd: __dirname }
+      );
 
-    const spinner = ora({
-      text: `downloading ${videos[0].title}`,
-      color: "red",
-    }).start();
+      const spinner = ora({
+        text: `downloading ${videos[0].title}`,
+        color: "red",
+      }).start();
 
-    // Will be called when the download starts.
-    video.on("info", function (info) {
-      spinner.stop();
-      play();
-    });
+      // Will be called when the download starts.
+      video.on("info", function (info) {
+        spinner.stop();
+        play();
+      });
 
-    video.pipe(fs.createWriteStream(`commands/${videos[0].videoId}.webm`));
+      video.pipe(fs.createWriteStream(`commands/${videos[0].videoId}.webm`));
 
-    async function play() {
-      if (message.member.voice.channel) {
-        const connection = await message.member.voice.channel.join();
-        message.channel.stopTyping();
-        message.channel.send(`playing ${videos[0].title} \n${videos[0].url}`);
-        connection.play(`commands/${videos[0].videoId}.webm`);
+      async function play() {
+            message.channel.stopTyping();
+            message.channel.send(
+              `playing ${videos[0].title} \n${videos[0].url}`
+            );
+            connection.play(`commands/${videos[0].videoId}.webm`);
       }
     }
-  }
-    music();
   },
 };
