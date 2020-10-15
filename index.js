@@ -1,7 +1,3 @@
-const updateNotifier = require("update-notifier");
-const pkg = require("./package.json");
-updateNotifier({ pkg }).notify();
-
 require("dotenv").config();
 const Discord = require("discord.js");
 const client = new Discord.Client();
