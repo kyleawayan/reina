@@ -5,7 +5,6 @@ module.exports = {
   description: "is this user this?",
   execute(message, args) {
     stupidOrNaw = Math.round(Math.random());
-    console.log(stupidOrNaw);
     if (stupidOrNaw < 0.5) {
       message.channel.send(
         `yes, ${args[0]} is ${args.slice(1, 999).join(" ")}`

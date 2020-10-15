@@ -3,16 +3,23 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const i18n = require("i18n");
 const locale = require(`./locales/en.json`);
+const ora = require("ora");
 
 const fs = require("fs");
 client.commands = new Discord.Collection();
+const spinner = ora("loading commands").start();
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
+  spinner.color = "red";
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.name, command);
+  spinner.text = `loaded ${command.name}`;
 }
+
+spinner.color = "yellow";
+spinner.text = "connecting to discord";
 
 i18n.configure({
   locales: ["en"],
@@ -21,7 +28,14 @@ i18n.configure({
 i18n.setLocale("./locales/en.json");
 
 client.on("ready", () => {
-  console.log(`Logged in as ${client.user.tag}!`);
+  spinner.clear();
+  console.log(`                                              
+    __      ___     ( )   __      ___    
+  //  ) ) //___) ) / / //   ) ) //   ) ) 
+ //      //       / / //   / / //   / /  
+//      ((____   / / //   / / ((___( (   
+   `);
+  spinner.succeed(`logged in as ${client.user.tag}!`);
 });
 
 client.on("message", (msg) => {
