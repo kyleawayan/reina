@@ -1,8 +1,7 @@
 module.exports = {
-  // use https://github.com/przemyslawpluta/node-youtube-dl
-  // pass url to music.js and make temporary audio file, (make some queue system too), and use discord.js to play it
   name: "is",
   description: "is this user this?",
+  usage: "kyle stupid?",
   execute(message, args) {
     stupidOrNaw = Math.round(Math.random());
     if (stupidOrNaw < 0.5) {

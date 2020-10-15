@@ -1,3 +1,7 @@
+const updateNotifier = require("update-notifier");
+const pkg = require("./package.json");
+updateNotifier({ pkg }).notify();
+
 require("dotenv").config();
 const Discord = require("discord.js");
 const client = new Discord.Client();
@@ -11,7 +15,7 @@ const spinner = ora("loading commands").start();
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
-  spinner.color = "red";
+spinner.color = "red";
 for (const file of commandFiles) {
   const command = require(`./commands/${file}`);
   client.commands.set(command.name, command);
@@ -49,66 +53,75 @@ client.on("message", (msg) => {
   }
 });
 
+// right now i don't know how to implement i18n to prefixes, so right now i have three client listeners.
+// may not be the best thing right now but it works
+
+// reina prefix
 client.on("message", (message) => {
   const prefix = "reina";
-  // "reina" will be the "prexix"
-  // make a better way to handle commands: ex. if the message is "reina play", then take the second word (play)
-  // and look for the existing js file in /things/
-  // so since it's play, it would execute stuff in play.js
 
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
-  const command = args.shift().toLowerCase();
+  const precommand = args.shift().toLowerCase();
 
-  if (!client.commands.has(command)) return;
+  const command =
+    client.commands.get(precommand) ||
+    client.commands.find(
+      (cmd) => cmd.aliases && cmd.aliases.includes(precommand)
+    );
+  if (!command) return;
 
   try {
-    client.commands.get(command).execute(message, args);
+    client.commands.get(command.name).execute(message, args);
   } catch (error) {
     console.error(error);
     message.reply("there was an error trying to execute that command!");
   }
 });
 
+// rei prefix
 client.on("message", (message) => {
   const prefix = "rei";
-  // "reina" will be the "prexix"
-  // make a better way to handle commands: ex. if the message is "reina play", then take the second word (play)
-  // and look for the existing js file in /things/
-  // so since it's play, it would execute stuff in play.js
 
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
-  const command = args.shift().toLowerCase();
+  const precommand = args.shift().toLowerCase();
 
-  if (!client.commands.has(command)) return;
+  const command =
+    client.commands.get(precommand) ||
+    client.commands.find(
+      (cmd) => cmd.aliases && cmd.aliases.includes(precommand)
+    );
+  if (!command) return;
 
   try {
-    client.commands.get(command).execute(message, args);
+    client.commands.get(command.name).execute(message, args);
   } catch (error) {
     console.error(error);
     message.reply("there was an error trying to execute that command!");
   }
 });
 
+// rey prefix
 client.on("message", (message) => {
   const prefix = "rey";
-  // "reina" will be the "prexix"
-  // make a better way to handle commands: ex. if the message is "reina play", then take the second word (play)
-  // and look for the existing js file in /things/
-  // so since it's play, it would execute stuff in play.js
 
   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
   const args = message.content.slice(prefix.length).trim().split(/ +/);
-  const command = args.shift().toLowerCase();
+  const precommand = args.shift().toLowerCase();
 
-  if (!client.commands.has(command)) return;
+  const command =
+    client.commands.get(precommand) ||
+    client.commands.find(
+      (cmd) => cmd.aliases && cmd.aliases.includes(precommand)
+    );
+  if (!command) return;
 
   try {
-    client.commands.get(command).execute(message, args);
+    client.commands.get(command.name).execute(message, args);
   } catch (error) {
     console.error(error);
     message.reply("there was an error trying to execute that command!");
