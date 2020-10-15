@@ -68,11 +68,11 @@ module.exports = {
         
         message.channel.startTyping();
         const dispatcher = queue.connection
-          .play(await ytdl(song.url), { type: 'opus' })
+          .play(await ytdl(song.url), { type: "opus" })
           .on("start", () => {
             message.channel.stopTyping();
           })
-          .on("finish", () => {
+          .on("close", () => {
             queue.songs.shift();
             play(queue.songs[0]);
           })
