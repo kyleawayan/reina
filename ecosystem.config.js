@@ -1,6 +1,7 @@
 module.exports = {
   apps: [
     {
+      name: "reina",
       script: "index.js",
       watch: ".",
     },
