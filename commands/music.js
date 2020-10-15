@@ -1,9 +1,6 @@
 const yts = require("yt-search");
-const fs = require("fs");
 const youtubedl = require("youtube-dl");
 const ora = require("ora");
-
-// queue system from https://github.com/iCrawl/discord-music-bot/blob/master/src/commands/play.js
 
 module.exports = {
   name: "play",
@@ -14,7 +11,6 @@ module.exports = {
     async function test() {
       if (message.member.voice.channel) {
         connection = await message.member.voice.channel.join();
-        message.channel.startTyping();
         music();
       } else {
         message.channel.send(`you need to join a voice channel`);
@@ -34,7 +30,6 @@ module.exports = {
 
       if (serverQueue) {
         serverQueue.songs.push(song);
-        console.log(serverQueue.songs);
         return message.channel.send(`✅ **${videos[0].title}** has been added to the queue!`);
       }
 
@@ -75,7 +70,6 @@ module.exports = {
         // Will be called when the download starts.
         video.on("info", function (info) {
           spinner.stop();
-          message.channel.stopTyping();
           playaudio()
         });
   
@@ -93,10 +87,12 @@ module.exports = {
         queueConstruct.connection = connection;
         play(queueConstruct.songs[0]);
       } catch (error) {
-        console.error(`I could not join the voice channel: ${error}`);
+        console.error(`i could not join the voice channel: ${error}`);
         message.client.queue.delete(message.guild.id);
         await channel.leave();
-        return message.channel.send(`I could not join the voice channel: ${error}`);
+        return message.channel.send(
+          `i could not join the voice channel: ${error}`
+        );
       }
 
     }
