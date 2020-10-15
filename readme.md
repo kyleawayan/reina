@@ -12,6 +12,8 @@ once your environment variable is set, you can start reina with `npm start`.
 ## usage
 right now there are not many commands, but her "prefix" is `reina`. you could also use `rey` or `rei`. it's like speaking naturally to someone, so for example, a command can be `reina play niki` or `rei play niki` *(no music command yet)*.
 
+you can list all the commands available by using `reina help`.
+
 ## make your own commands
 reina uses [a dynamic command handler](https://discordjs.guide/command-handling/#individual-command-files), so it's very easy to make your own commands. you can do so by creating a module in the `commands` folder, say for example, `ping.js`. here's an example ping module:
 ```
