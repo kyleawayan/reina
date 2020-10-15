@@ -6,13 +6,13 @@
 </p>
 
 ## installation
-set the environment variable `discord` to your bot token. you can also make a `.env` file to use [dotenv](https://www.npmjs.com/package/dotenv).
+set the environment variable `discord` to your bot token. you can also make a `.env` file in the root directory to use [dotenv](https://www.npmjs.com/package/dotenv).
 once your environment variable is set, you can start reina with `npm start`.
 
 ## usage
-right now there are not many commands, but her "prefix" is `reina`. you could also use `rey` or `rei`. it's like speaking naturally to someone, so for example, a command can be `reina play niki` or `rei play niki` *(no music command yet)*.
+right now there are not many commands, but her "prefix" is `reina`. you could also use `rey` or `rei`. it's like speaking naturally to someone, so for example, a command can be `reina play niki` or `rei play niki`.
 
-you can list all the commands available by using `reina help`.
+please refer to the [wiki page](https://github.com/kyleawayan/reina/wiki/Commands) for a list of available commands. you can also list all the commands in discord by using `reina help`.
 
 ## make your own commands
 reina uses [a dynamic command handler](https://discordjs.guide/command-handling/#individual-command-files), so it's very easy to make your own commands. you can do so by creating a module in the `commands` folder, say for example, `ping.js`. here's an example ping module:
@@ -48,5 +48,6 @@ module.exports = {
 
 lastly, you can run reina in debug mode by using `npm run dev`. this will restart reina whenever a file is changed using [nodemon](https://www.npmjs.com/package/nodemon).
 
-## art background
-the art background is from niki's album, [*Zephyr*](https://open.spotify.com/album/4E3FHEEdQkcuEd0D2GKRrX).
+## credits
+- [iCrawl's example](https://github.com/iCrawl/discord-music-bot) for a music queuing system
+- the art background is from niki's album, [*Zephyr*](https://open.spotify.com/album/4E3FHEEdQkcuEd0D2GKRrX).
