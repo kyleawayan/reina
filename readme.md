@@ -9,6 +9,8 @@
 set the environment variable `discord` to your bot token. you can also make a `.env` file in the root directory to use [dotenv](https://www.npmjs.com/package/dotenv).
 once your environment variable is set, you can start reina with `npm start`.
 
+if you would like to run reina without having to keep anything open, i would recommend following this guide on how to setup reina with pm2: https://discordjs.guide/improving-dev-environment/pm2.html#installation.
+
 ## usage
 right now there are not many commands, but her "prefix" is `reina`. you could also use `rey` or `rei`. it's like speaking naturally to someone, so for example, a command can be `reina play niki` or `rei play niki`.
 
