@@ -1,7 +1,7 @@
 {
   "name": "reina",
   "version": "0.1.0",
-  "description": "",
+  "description": "the minimal discord bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
