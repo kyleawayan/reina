@@ -1,9 +1,10 @@
 require("dotenv").config();
 const Discord = require("discord.js");
-const client = new Discord.Client();
 const i18n = require("i18n");
 const locale = require(`./locales/en.json`);
 const ora = require("ora");
+const MusicClient = require("./struct/Client");
+const client = new MusicClient();
 
 const fs = require("fs");
 client.commands = new Discord.Collection();
