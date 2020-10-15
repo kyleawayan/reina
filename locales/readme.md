@@ -1,0 +1,1 @@
+this is used for the hey command. so for example, you can say `hey reina` or `sup rey`, basically anything in `en.json`. this uses [i18n](https://www.npmjs.com/package/i18n).
