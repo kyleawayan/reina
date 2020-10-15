@@ -7,9 +7,7 @@ module.exports = {
     return message.channel.send(`
 song queue
 —
-**${serverQueue.songs[0].title}**
-
-${serverQueue.songs.map((song) => `${song.title}`).join("\n")}
+${serverQueue.songs.map((song) => `• ${song.title}`).join("\n")}
 
 		`);
   },

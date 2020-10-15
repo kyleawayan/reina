@@ -4,5 +4,6 @@ module.exports = {
   execute(message) {
     const serverQueue = message.client.queue.get(message.guild.id);
     serverQueue.songs = [];
+    serverQueue.connection.dispatcher.end();
   },
 };
