@@ -3,7 +3,6 @@ const Discord = require("discord.js");
 const client = new Discord.Client();
 const i18n = require("i18n");
 const locale = require(`./locales/en.json`);
-const StringUtil = require("./util/stringUtil");
 
 const fs = require("fs");
 client.commands = new Discord.Collection();
