@@ -1,7 +1,9 @@
 const yts = require("yt-search");
 const youtubedl = require("youtube-dl");
+const ytdl = require("ytdl-core"); // only for search since i couldn't get youtube-dl working
 const fs = require("fs")
 const ora = require("ora");
+const { Util } = require("discord.js");
 
 module.exports = {
   name: "play",
@@ -42,9 +44,9 @@ module.exports = {
       } else {
         const songInfo = await ytdl.getInfo(args[0].replace(/<(.+)>/g, "$1"));
         song = {
-          id: songInfo.videoDetails.video_id,
-          title: Util.escapeMarkdown(songInfo.videoDetails.title),
-          url: songInfo.videoDetails.video_url,
+          id: songInfo.id,
+          title: Util.escapeMarkdown(songInfo.title),
+          url: songInfo.video_url,
         };
       }
 
@@ -84,6 +86,7 @@ module.exports = {
           { cwd: __dirname }
         ).pipe(fs.createWriteStream('file.webm', {flags: 'w'}));
   
+        message.channel.startTyping();
         const spinner = ora({
           text: `downloading ${song.title}`,
           color: "red",
@@ -95,6 +98,7 @@ module.exports = {
   
           const dispatcher = connection.play(readStream)
           .on('start', () => {
+            message.channel.stopTyping();
             spinner.stop();
           })
           .on('finish', () => {
