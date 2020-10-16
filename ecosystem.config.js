@@ -18,5 +18,15 @@ module.exports = {
         "npm install && pm2 reload ecosystem.config.js --env production",
       "pre-setup": "",
     },
+    dev: {
+      user: "ubuntu",
+      host: "reina",
+      ref: "origin/dev",
+      repo: "https://github.com/kyleawayan/reina",
+      path: "/home/ubuntu/reinadev",
+      "pre-deploy-local": "",
+      "post-deploy": "npm install && pm2 reload ecosystem.config.js --env dev",
+      "pre-setup": "",
+    },
   },
 };
