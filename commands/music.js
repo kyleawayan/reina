@@ -78,6 +78,7 @@ module.exports = {
           })
           .on("error", (error) => console.error(error));
         dispatcher.setVolumeLogarithmic(queue.volume / 5);
+        message.client.user.setActivity(song.title, { type: "LISTENING" });
       };
 
       try {
