@@ -72,7 +72,7 @@ module.exports = {
           .on("start", () => {
             message.channel.stopTyping();
           })
-          .on("close", () => {
+          .on("finish", () => {
             queue.songs.shift();
             play(queue.songs[0]);
           })
