@@ -19,8 +19,8 @@ module.exports = {
       "pre-setup": "",
     },
     dev: {
-      user: "ubuntu",
-      host: "reina",
+      user: "ubuntu", // ok u can't really have a development server and a production server going at the same time, i thought it would just run the dev version if i told it to deploy. well i learned the hard way and it always deployed the main branch and not the "dev" branch and none of my changes applied.
+      host: "reina", // so in reality the development server should be somewhere else
       ref: "origin/dev",
       repo: "https://github.com/kyleawayan/reina",
       path: "/home/ubuntu/reinadev",
