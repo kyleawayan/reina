@@ -9,7 +9,11 @@
 set the environment variable `discord` to your bot token. you can also make a `.env` file in the root directory to use [dotenv](https://www.npmjs.com/package/dotenv).
 once your environment variable is set, you can start reina with `npm start`.
 
+note that reina does write files in her directory. specifically, with the music command, she needs to download the file temporarily in order to play it. so make sure that whatever your using to run her has write permissions. she also requires python in order to use [node-youtube-dl](https://github.com/przemyslawpluta/node-youtube-dl).
+
 if you would like to run reina without having to keep anything open, i would recommend following this guide on how to setup reina with pm2: https://discordjs.guide/improving-dev-environment/pm2.html#installation. or use the `ecosystem.config.js` template (refer to https://pm2.keymetrics.io/docs/usage/deployment/) for deployment on a server.
+
+if you are having issues, please refer to the—*work-in-progress*—[debugging page](https://github.com/kyleawayan/reina/wiki/debugging). please submit an issue if you need help, or even want to describe your own fixes to add to the wiki.
 
 ## usage
 right now there are not many commands, but her "prefix" is `reina`. you could also use `rey` or `rei`. it's like speaking naturally to someone, so for example, a command can be `reina play niki` or `rei play niki`.
