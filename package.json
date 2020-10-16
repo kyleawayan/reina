@@ -1,6 +1,6 @@
 {
   "name": "reina",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "the minimal discord bot",
   "main": "index.js",
   "scripts": {
@@ -27,5 +27,6 @@
   "bugs": {
     "url": "https://github.com/kyleawayan/reina/issues"
   },
-  "homepage": "https://github.com/kyleawayan/reina#readme"
+  "homepage": "https://github.com/kyleawayan/reina#readme",
+  "devDependencies": {}
 }
