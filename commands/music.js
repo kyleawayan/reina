@@ -67,26 +67,16 @@ module.exports = {
         }
         
         message.channel.startTyping();
-
-        let writeStream = await ytdl(song.url).pipe(
-          fs.createWriteStream("file.webm", { flags: "w" })
-        );
-
-        await new Promise((done) => setTimeout(done, 5000));
-
-        let readStream = fs.createReadStream("file.webm");
-
         const dispatcher = queue.connection
-          .play(readStream)
+          .play(await ytdl(song.url), { type: "opus" })
           .on("start", () => {
             message.channel.stopTyping();
           })
-          .once("finish", () => {
-            writeStream.end();
+          .on("close", () => {
             queue.songs.shift();
             play(queue.songs[0]);
           })
-          .once("error", (error) => console.error(error));
+          .on("error", (error) => console.error(error));
         dispatcher.setVolumeLogarithmic(queue.volume / 5);
       };
 
