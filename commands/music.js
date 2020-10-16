@@ -54,20 +54,6 @@ module.exports = {
           `**${videos[0].title}** has been added to the queue`
         );
       }
-      const serverQueue = message.client.queue.get(message.guild.id);
-      const r = await yts(args.slice(0, 999).join(" "));
-      const videos = r.videos.slice(0, 3);
-
-      const song = {
-        id: videos[0].videoId,
-        title: videos[0].title,
-        url: videos[0].url
-      };
-
-      if (serverQueue) {
-        serverQueue.songs.push(song);
-        return message.channel.send(`✅ **${videos[0].title}** has been added to the queue!`);
-      }
 
       const queueConstruct = {
         textChannel: message.channel,
