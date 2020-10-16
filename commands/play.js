@@ -1,7 +1,7 @@
 const yts = require("yt-search");
 const youtubedl = require("youtube-dl");
 const ytdl = require("ytdl-core"); // only for search since i couldn't get youtube-dl working
-const fs = require("fs")
+const fs = require("fs");
 const ora = require("ora");
 const { Util } = require("discord.js");
 
@@ -18,7 +18,8 @@ module.exports = {
       } else {
         message.channel.send(`you need to join a voice channel`);
       }
-    } test();
+    }
+    test();
 
     async function music() {
       var videos;
@@ -62,62 +63,60 @@ module.exports = {
         }
       }
 
-
-
       const queueConstruct = {
         textChannel: message.channel,
         voiceChannel: channel,
         connection: null,
         songs: [],
         volume: 2,
-        playing: true
+        playing: true,
       };
 
       message.client.queue.set(message.guild.id, queueConstruct);
       queueConstruct.songs.push(song);
 
-      const play = async song => {
-
+      const play = async (song) => {
         const queue = message.client.queue.get(message.guild.id);
         if (!song) {
           queue.voiceChannel.leave();
           message.client.queue.delete(message.guild.id);
           return;
         }
-        
+
         let writeStream = await youtubedl(
           song.url,
           // Optional arguments passed to youtube-dl.
           ["--format=bestaudio"],
           // Additional options can be given for calling `child_process.execFile()`.
           { cwd: __dirname }
-        ).pipe(fs.createWriteStream('file.webm', {flags: 'w'}));
-  
+        ).pipe(fs.createWriteStream("file.webm", { flags: "w" }));
+
         message.channel.startTyping();
         const spinner = ora({
           text: `downloading ${song.title}`,
           color: "red",
         }).start();
 
-        await new Promise(done => setTimeout(done, 5000));
+        await new Promise((done) => setTimeout(done, 5000));
 
-        let readStream = fs.createReadStream('file.webm');
-  
-          const dispatcher = connection.play(readStream)
-          .on('start', () => {
-            message.channel.stopTyping();
+        let readStream = fs.createReadStream("file.webm");
+
+        const dispatcher = connection
+          .play(readStream)
+          .on("start", () => {
             spinner.stop();
           })
-          .on('finish', () => {
+          .on("finish", () => {
             writeStream.end();
             queue.songs.shift();
-            play(queue.songs[0])
+            play(queue.songs[0]);
+            message.client.user.setActivity(null);
           })
-          .on('error', error => console.error(error));
-          dispatcher.setVolumeLogarithmic(queue.volume / 5);
-          message.client.user.setActivity(song.title, { type: "LISTENING" });
-
-      }
+          .on("error", (error) => console.error(error));
+        dispatcher.setVolumeLogarithmic(queue.volume / 5);
+        message.client.user.setActivity(song.title, { type: "LISTENING" });
+        message.channel.stopTyping();
+      };
       try {
         queueConstruct.connection = connection;
         play(queueConstruct.songs[0]);
@@ -129,7 +128,6 @@ module.exports = {
           `i could not join the voice channel: ${error}`
         );
       }
-
     }
   },
 };
