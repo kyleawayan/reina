@@ -41,21 +41,28 @@ module.exports = {
           title: videos[0].title,
           url: videos[0].url,
         };
+        if (serverQueue) {
+          serverQueue.songs.push(song);
+          return message.channel.send(
+            `**${videos[0].title}** has been added to the queue`
+          );
+        }
       } else {
         const songInfo = await ytdl.getInfo(args[0].replace(/<(.+)>/g, "$1"));
         song = {
           id: songInfo.id,
-          title: Util.escapeMarkdown(songInfo.title),
-          url: songInfo.video_url,
+          title: Util.escapeMarkdown(songInfo.videoDetails.title),
+          url: songInfo.videoDetails.video_url,
         };
+        if (serverQueue) {
+          serverQueue.songs.push(song);
+          return message.channel.send(
+            `**${songInfo.videoDetails.title}** has been added to the queue`
+          );
+        }
       }
 
-      if (serverQueue) {
-        serverQueue.songs.push(song);
-        return message.channel.send(
-          `**${videos[0].title}** has been added to the queue`
-        );
-      }
+
 
       const queueConstruct = {
         textChannel: message.channel,
