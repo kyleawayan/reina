@@ -12,14 +12,12 @@
   "dependencies": {
     "@discordjs/opus": "^0.3.2",
     "discord.js": "^12.3.1",
+    "dotenv": "^8.2.0",
     "i18n": "^0.13.2",
+    "nodemon": "^2.0.5",
     "ora": "^5.1.0",
     "youtube-dl": "^3.0.2",
     "yt-search": "^2.3.3"
-  },
-  "devDependencies": {
-    "dotenv": "^8.2.0",
-    "nodemon": "^2.0.5"
   },
   "repository": {
     "type": "git",
