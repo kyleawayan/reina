@@ -5,6 +5,7 @@ const locale = require(`./locales/en.json`);
 const ora = require("ora");
 const MusicClient = require("./struct/Client");
 const client = new MusicClient();
+var pjson = require("./package.json");
 
 const fs = require("fs");
 client.commands = new Discord.Collection();
@@ -32,11 +33,14 @@ i18n.setLocale("./locales/en.json");
 
 client.on("ready", () => {
   spinner.clear();
+  // prettier-ignore
   console.log(`                                              
     __      ___     ( )   __      ___    
   //  ) ) //___) ) / / //   ) ) //   ) ) 
  //      //       / / //   / / //   / /  
 //      ((____   / / //   / / ((___( (   
+
+                v${pjson.version}
    `);
   spinner.succeed(`logged in as ${client.user.tag}!`);
 });
