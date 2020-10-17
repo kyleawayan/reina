@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-process.chdir(__dirname);
 require("dotenv").config();
 if (process.env.id == "" || process.env.id == undefined) {
   console.log("please set your user id environment variable!");
