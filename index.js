@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 process.chdir(__dirname);
 require("dotenv").config();
-if (process.env.id == "") {
+if (process.env.id == "" || process.env.id == undefined) {
   console.log("please set your user id environment variable!");
   process.exit();
 }
 
-if (process.env.discord == "") {
+if (process.env.discord == "" || process.env.discord == undefined) {
   console.log("please set your discord token environment variable!");
   process.exit();
 }
