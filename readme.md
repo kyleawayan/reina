@@ -5,6 +5,9 @@
     a minimal <a href="https://www.npmjs.com/package/discord.js">discord.js</a> bot ✨
 </p>
 
+## disclaimer
+this bot has no complicated permissions and stuff like that. reina is more for chill servers with some of your friends, not big servers.
+
 ## installation
 set the environment variable `discord` to your bot token. you can also make a `.env` file in the root directory to use [dotenv](https://www.npmjs.com/package/dotenv).
 once your environment variable is set, you can start reina with `npm start`.
@@ -55,5 +58,5 @@ module.exports = {
 lastly, you can run reina in debug mode by using `npm run dev`. this will restart reina whenever a file is changed using [nodemon](https://www.npmjs.com/package/nodemon).
 
 ## credits
-- [iCrawl's example](https://github.com/iCrawl/discord-music-bot) for a music queuing system
+- [iCrawl's example](https://github.com/iCrawl/discord-music-bot) and [EvoBot](https://github.com/eritislami/evobot/) for a music queuing system
 - the art background is from niki's album, [*Zephyr*](https://open.spotify.com/album/4E3FHEEdQkcuEd0D2GKRrX).
