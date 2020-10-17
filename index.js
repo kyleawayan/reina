@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+process.chdir(__dirname);
 require("dotenv").config();
 const Discord = require("discord.js");
 const i18n = require("i18n");
