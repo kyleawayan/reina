@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 require("dotenv").config();
 const Discord = require("discord.js");
 const i18n = require("i18n");
