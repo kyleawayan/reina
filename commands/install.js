@@ -3,7 +3,7 @@ const fs = require("fs");
 const path = require("path");
 const { spawn } = require("child_process");
 const quiz = {
-  question: `i am not responsible for any harm done by installing third-party commands! please check what you are installing first! type "agree" if you agree`,
+  question: `i am not responsible for any harm done by installing third-party commands! please check what you are installing first! type "agree" if you agree. installation will cancel if there is no response in the next ten seconds.`,
   answers: ["agree"],
 };
 
