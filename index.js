@@ -1,6 +1,15 @@
 #!/usr/bin/env node
 process.chdir(__dirname);
 require("dotenv").config();
+if (process.env.id == "") {
+  console.log("please set your user id environment variable!");
+  process.exit();
+}
+
+if (process.env.discord == "") {
+  console.log("please set your discord token environment variable!");
+  process.exit();
+}
 const Discord = require("discord.js");
 const i18n = require("i18n");
 const locale = require(`./locales/en.json`);
@@ -14,16 +23,6 @@ const updateNotifier = require("update-notifier");
 const pkg = require("./package.json");
 
 updateNotifier({ pkg }).notify();
-
-if (process.env.id == "") {
-  console.log("please set your user id environment variable!");
-  process.exit();
-}
-
-if (process.env.discord == "") {
-  console.log("please set your discord token environment variable!");
-  process.exit();
-}
 
 
 const spinner = ora({
