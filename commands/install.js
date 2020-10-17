@@ -64,6 +64,20 @@ module.exports = {
                 }
               });
 
+              const tempjson = path.join(__dirname, "..", "temp", "init.json");
+              const destjson = path.join(
+                __dirname,
+                "..",
+                "commands",
+                `${init.name}.json`
+              );
+
+              fs.rename(tempjson, destjson, (err) => {
+                if (err) {
+                  console.log(err);
+                }
+              });
+
               message.channel.send(
                 `installed ${init.name}! please restart reina.`
               );
