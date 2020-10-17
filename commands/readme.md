@@ -1,1 +1,0 @@
-thank you so much for [iCrawl's example](https://github.com/iCrawl/discord-music-bot) for a music bot with a queuing system!
