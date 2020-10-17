@@ -117,3 +117,6 @@ dist
 
 # media files
 *.webm
+
+# credentials
+/credentials

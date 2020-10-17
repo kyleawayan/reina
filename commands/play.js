@@ -1,6 +1,5 @@
 const yts = require("yt-search");
-const youtubedl = require("youtube-dl");
-const ytdl = require("ytdl-core"); // only for search since i couldn't get youtube-dl working
+const ytdl = require("ytdl-core");
 const fs = require("fs");
 const ora = require("ora");
 const { Util } = require("discord.js");
@@ -83,12 +82,8 @@ module.exports = {
           return;
         }
 
-        let writeStream = await youtubedl(
+        let writeStream = await ytdl(
           song.url,
-          // Optional arguments passed to youtube-dl.
-          ["--format=bestaudio"],
-          // Additional options can be given for calling `child_process.execFile()`.
-          { cwd: __dirname }
         ).pipe(fs.createWriteStream("file.webm", { flags: "w" }));
 
         message.channel.startTyping();
