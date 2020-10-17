@@ -12,7 +12,7 @@ this bot has no complicated permissions and stuff like that. reina is more for c
 - minimal bot that doesn't have any complicated permissions or setup
 - music bot that can search youtube and play direct youtube urls [*(more music features such as queuing youtube and spotify playlists and soundcloud support coming soon)*](https://github.com/kyleawayan/reina/projects/1)
 - easily install third-party commands straight through discord
-- make your own commands easily and publish on github for others to download!
+- make your own commands easily and publish on github for others to download! check out the [reina-command](https://github.com/topics/reina-command) topic for more commands!
 
 ## installation
 set the environment variable `discord` to your bot token. after that, set another environment variable, `id`, to your discord user id (or whoever is going to have admin permissions to your bot). you can also make a `.env` file in the root directory to use [dotenv](https://www.npmjs.com/package/dotenv).
