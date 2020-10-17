@@ -55,7 +55,7 @@ module.exports = {
 
 lastly, you can run reina in debug mode by using `npm run dev`. this will restart reina whenever a file is changed using [nodemon](https://www.npmjs.com/package/nodemon).
 
-find out more details about developing and publishing on [this wiki page](https://github.com/kyleawayan/reina/wiki/developing-third-party-commands)
+find out more details about developing and publishing on [this wiki page](https://github.com/kyleawayan/reina/wiki/developing-third-party-commands).
 
 ## credits
 - [iCrawl's example](https://github.com/iCrawl/discord-music-bot) and [EvoBot](https://github.com/eritislami/evobot/) for a music queuing system
