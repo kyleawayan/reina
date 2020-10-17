@@ -6,7 +6,8 @@ const { Util } = require("discord.js");
 
 module.exports = {
   name: "play",
-  description: "play music",
+  description: "play music from youtube",
+  usage: "niki` or `reina play https://www.youtube.com/watch?v=P_FB84Acp60",
   execute(message, args) {
     const { channel } = message.member.voice;
     var connection;
@@ -83,9 +84,9 @@ module.exports = {
           return;
         }
 
-        let writeStream = await ytdl(
-          song.url,
-        ).pipe(fs.createWriteStream("file.webm", { flags: "w" }));
+        let writeStream = await ytdl(song.url).pipe(
+          fs.createWriteStream("file.webm", { flags: "w" })
+        );
 
         message.channel.startTyping();
         const spinner = ora({
