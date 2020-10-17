@@ -6,7 +6,7 @@
 </p>
 
 ## disclaimer
-this bot has no complicated permissions and stuff like that. reina is more for chill servers with some of your friends, not big servers.
+this bot has no complicated permissions and stuff like that. reina is more for chill servers with some of your friends, not big servers. also, she **is really early in development** so there is some bugs that still need to be fixed.
 
 ## installation
 set the environment variable `discord` to your bot token. after that, set another environment variable, `id`, to your discord user id (or whoever is going to have admin permissions to your bot). you can also make a `.env` file in the root directory to use [dotenv](https://www.npmjs.com/package/dotenv).
