@@ -25,7 +25,7 @@ module.exports = {
           // agreed
           message.channel.send(`cloning repo...`);
 
-          clone(args[0], "temp", null, (e) => {
+          clone(args[0], "temp", { shallow: true }, (e) => {
             if (e !== undefined) {
               console.log(e);
               message.channel.send("error. please check log for details.");
@@ -48,14 +48,14 @@ module.exports = {
               });
 
               message.channel.send(
-                `moving ${init.filename} to commands directory...`
+                `moving ${init.name} to commands directory...`
               );
               const temp = path.join(__dirname, "..", "temp", init.filename);
               const dest = path.join(
                 __dirname,
                 "..",
                 "commands",
-                init.filename
+                `${init.name}.js`
               );
 
               fs.rename(temp, dest, (err) => {
@@ -65,7 +65,7 @@ module.exports = {
               });
 
               message.channel.send(
-                `installed ${init.filename}! please restart reina.`
+                `installed ${init.name}! please restart reina.`
               );
 
               const tempdir = path.join(__dirname, "..", "temp");
