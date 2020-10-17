@@ -17,11 +17,6 @@ const client = new MusicClient();
 var pjson = require("./package.json");
 const fs = require("fs");
 client.commands = new Discord.Collection();
-const updateNotifier = require("update-notifier");
-const pkg = require("./package.json");
-
-updateNotifier({ pkg }).notify();
-
 
 const spinner = ora({
   text: `loading commands`,
