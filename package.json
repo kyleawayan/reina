@@ -3,9 +3,6 @@
   "version": "0.3.3",
   "description": "the minimal discord bot",
   "main": "index.js",
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  },
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
