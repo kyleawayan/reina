@@ -1,11 +1,16 @@
 {
   "name": "reina",
-  "version": "0.2.3",
+  "version": "0.3.0",
   "description": "the minimal discord bot",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js"
+  },
+  "nodemonConfig": {
+    "ignore": [
+      "temp/*"
+    ]
   },
   "author": "Kyle Awayan",
   "license": "ISC",
@@ -13,6 +18,7 @@
     "@discordjs/opus": "^0.3.2",
     "discord.js": "^12.3.1",
     "dotenv": "^8.2.0",
+    "git-clone": "^0.1.0",
     "i18n": "^0.13.2",
     "nodemon": "^2.0.5",
     "ora": "^5.1.0",

@@ -6,9 +6,20 @@ const ora = require("ora");
 const MusicClient = require("./struct/Client");
 const client = new MusicClient();
 var pjson = require("./package.json");
-
 const fs = require("fs");
 client.commands = new Discord.Collection();
+
+if (process.env.id == "") {
+  console.log("please set your user id environment variable!");
+  process.exit();
+}
+
+if (process.env.discord == "") {
+  console.log("please set your discord token environment variable!");
+  process.exit();
+}
+
+
 const spinner = ora({
   text: `loading commands`,
   color: "red",
