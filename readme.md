@@ -18,7 +18,7 @@ this bot has no complicated permissions and stuff like that. reina is more for c
 set the environment variable `discord` to your bot token. after that, set another environment variable, `id`, to your discord user id (or whoever is going to have admin permissions to your bot). you can also make a `.env` file in the root directory to use [dotenv](https://www.npmjs.com/package/dotenv).
 once your environment variable is set, you can start reina with `npm start`.
 
-if you would like to run reina without having to keep anything open, i would recommend following this guide on how to setup reina with pm2: https://discordjs.guide/improving-dev-environment/pm2.html#installation. or use the `ecosystem.config.js` template (refer to https://pm2.keymetrics.io/docs/usage/deployment/) for deployment on a server.
+if you would like to run reina without having to keep anything open, i would recommend following this guide on how to setup reina with pm2: https://discordjs.guide/improving-dev-environment/pm2.html#installation.
 
 if you are having issues, please refer to the—*work-in-progress*—[debugging page](https://github.com/kyleawayan/reina/wiki/debugging). please submit an issue if you need help, or even want to describe your own fixes to add to the wiki.
 
