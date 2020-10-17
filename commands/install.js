@@ -35,7 +35,9 @@ module.exports = {
 
               const init = require("../temp/init.json");
 
-              message.channel.send("installing " + init.dependecies.join(", "));
+              message.channel.send(
+                "installing " + init.dependecies.join(", ") + "..."
+              );
               init.dependecies.unshift("install");
               const deps = spawn("npm", init.dependecies);
               deps.stdout.on("data", function (data) {
@@ -45,7 +47,9 @@ module.exports = {
                 console.log(data.toString());
               });
 
-              message.channel.send(`installing ${init.filename}`);
+              message.channel.send(
+                `moving ${init.filename} to commands directory...`
+              );
               const temp = path.join(__dirname, "..", "temp", init.filename);
               const dest = path.join(
                 __dirname,
@@ -54,22 +58,23 @@ module.exports = {
                 init.filename
               );
 
-              fs.rename(temp, dest, function (err) {
-                console.log(err);
+              fs.rename(temp, dest, (err) => {
+                if (err) {
+                  console.log(err);
+                }
               });
 
               message.channel.send(
                 `installed ${init.filename}! please restart reina.`
               );
 
+              const tempdir = path.join(__dirname, "..", "temp");
 
-
-
-
-
-
-
-
+              fs.rmdir(tempdir, { recursive: true }, (err) => {
+                if (err) {
+                  console.log(err);
+                }
+              });
             }
           });
         })
