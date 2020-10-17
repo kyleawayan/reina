@@ -35,6 +35,7 @@ module.exports = {
               } else {
                 message.channel.send(`done cloning repo!`);
 
+                delete require.cache[require.resolve(`../temp/init.json`)];
                 const init = require("../temp/init.json");
 
                 message.channel.send(

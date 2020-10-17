@@ -25,7 +25,7 @@ module.exports = {
               console.log(err);
             } else {
               message.channel.send(
-                `**uninstalled ${init.name}!** you may need to restart reina for the command to go away.`
+                `**uninstalled ${init.name}!** please restart reina now.`
               );
             }
           });
@@ -63,7 +63,7 @@ module.exports = {
           });
           deps.on("exit", function () {
             message.channel.send(
-              `**uninstalled ${init.name}!** you may need to restart reina for the command to go away.`
+              `**uninstalled ${init.name}!** please restart reina now.`
             );
           });
 
