@@ -5,6 +5,9 @@
     a minimal <a href="https://www.npmjs.com/package/discord.js">discord.js</a> bot ✨
 </p>
 
+## disclaimer
+this bot has no complicated permissions and stuff like that. reina is more for chill servers with some of your friends, not big servers.
+
 ## installation
 set the environment variable `discord` to your bot token. you can also make a `.env` file in the root directory to use [dotenv](https://www.npmjs.com/package/dotenv).
 once your environment variable is set, you can start reina with `npm start`.
