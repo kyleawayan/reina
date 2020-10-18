@@ -26,6 +26,14 @@ module.exports = {
             // agreed
             message.channel.send(`cloning repo...`);
 
+            fs.access("./custom", (err) => {
+              if (err) {
+                fs.mkdirSync("./custom");
+              } else {
+                return;
+              }
+            });
+
             clone(args[0], "temp", { shallow: true }, (e) => {
               if (e !== undefined) {
                 console.log(e);
@@ -41,6 +49,7 @@ module.exports = {
                   "installing " + init.dependencies.join(", ") + "..."
                 );
                 init.dependencies.unshift("install");
+                init.dependencies.push("--no-save");
                 const deps = spawn("npm", init.dependencies);
                 deps.stdout.on("data", function (data) {
                   console.log(data.toString());
@@ -49,9 +58,11 @@ module.exports = {
                   console.log(data.toString());
                 });
                 deps.on("exit", function () {
-                  delete require.cache[require.resolve(`./${init.name}.js`)];
+                  delete require.cache[
+                    require.resolve(`../custom/${init.name}.js`)
+                  ];
                   try {
-                    const newCommand = require(`./${init.name}.js`);
+                    const newCommand = require(`../custom/${init.name}.js`);
                     message.client.commands.set(newCommand.name, newCommand);
                   } catch (error) {
                     console.error(error);
@@ -77,7 +88,7 @@ module.exports = {
                 const dest = path.join(
                   __dirname,
                   "..",
-                  "commands",
+                  "custom",
                   `${init.name}.js`
                 );
 
@@ -96,7 +107,7 @@ module.exports = {
                 const destjson = path.join(
                   __dirname,
                   "..",
-                  "commands",
+                  "custom",
                   `${init.name}.json`
                 );
 
