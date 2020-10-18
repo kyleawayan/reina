@@ -22,6 +22,7 @@ const spinner = ora({
   text: `loading commands`,
   color: "red",
 }).start();
+
 const commandFiles = fs
   .readdirSync("./commands")
   .filter((file) => file.endsWith(".js"));
@@ -30,6 +31,22 @@ for (const file of commandFiles) {
   client.commands.set(command.name, command);
   spinner.text = `loaded ${command.name}`;
 }
+
+fs.access("./custom", (err) => {
+  if (err) {
+    return;
+  } else {
+    const customCommandFiles = fs
+      .readdirSync("./custom")
+      .filter((file) => file.endsWith(".js"));
+    for (const file of customCommandFiles) {
+      const command = require(`./custom/${file}`);
+      client.commands.set(command.name, command);
+      spinner.text = `loaded ${command.name}`;
+    }
+  }
+});
+
 
 spinner.color = "yellow";
 spinner.text = "connecting to discord";
