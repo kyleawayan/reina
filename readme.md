@@ -30,7 +30,7 @@ please refer to the [wiki page](https://github.com/kyleawayan/reina/wiki/Command
 ## make your own commands
 you can find out more on [this wiki page](https://github.com/kyleawayan/reina/wiki/developing-third-party-commands), but here's a quick summary:
 
-reina uses [a dynamic command handler](https://discordjs.guide/command-handling/#individual-command-files), so it's very easy to make your own commands. you can do so by creating a module in the `commands` folder, say for example, `ping.js`. here's an example ping module:
+reina uses [a dynamic command handler](https://discordjs.guide/command-handling/#individual-command-files), so it's very easy to make your own commands. you can do so by creating a module in a folder called `custom` (you may need to create the folder), say for example, `ping.js`. here's an example ping module:
 ```
 // ping.js
 module.exports = {
