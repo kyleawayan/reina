@@ -6,7 +6,6 @@ module.exports = {
   name: "uninstall",
   description: "uninstall third-party commands",
   usage: "rei-hi",
-  cooldown: 10,
   execute(message, args) {
     if (message.author.id == process.env.id) {
       if (args[0] !== undefined) {

@@ -17,7 +17,6 @@ module.exports = {
   name: "install",
   description: "install third-party commands",
   usage: "<github link>",
-  cooldown: 10,
   execute(message, args) {
     if (message.author.id == process.env.id) {
       message.channel.send(quiz.question).then(() => {
