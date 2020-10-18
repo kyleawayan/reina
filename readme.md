@@ -28,8 +28,6 @@ right now there are not many commands, but her "prefix" is `reina`. you could al
 please refer to the [wiki page](https://github.com/kyleawayan/reina/wiki/Commands) for a list of available commands. you can also list all the commands in discord by using `reina help`.
 
 ## make your own commands
-you can find out more on [this wiki page](https://github.com/kyleawayan/reina/wiki/developing-third-party-commands), but here's a quick summary:
-
 reina uses [a dynamic command handler](https://discordjs.guide/command-handling/#individual-command-files), so it's very easy to make your own commands. you can do so by creating a module in a folder called `custom` (you may need to create the folder), say for example, `ping.js`. here's an example ping module:
 ```
 // ping.js
@@ -62,6 +60,8 @@ module.exports = {
 ```
 
 lastly, you can run reina in debug mode by using `npm run dev`. this will restart reina whenever a file is changed using [nodemon](https://www.npmjs.com/package/nodemon).
+
+you can find out more on developing commands and publishing them on [this wiki page](https://github.com/kyleawayan/reina/wiki/developing-third-party-commands).
 
 ## credits
 - [iCrawl's example](https://github.com/iCrawl/discord-music-bot) and [EvoBot](https://github.com/eritislami/evobot/) for a music queuing system
