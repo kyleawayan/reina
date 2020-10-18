@@ -11,19 +11,22 @@ module.exports = {
     if (message.author.id == process.env.id) {
       if (args[0] !== undefined) {
         if (args[1] !== "--with-deps") {
-          const init = require(`../commands/${args[0]}.json`);
-          const commandspath = path.join(__dirname, "..", "commands");
+          const init = require(`../custom/${args[0]}.json`);
+          const commandspath = path.join(__dirname, "..", "custom");
 
-          delete require.cache[require.resolve(`./${init.name}.js`)];
+          delete require.cache[require.resolve(`../custom/${init.name}.js`)]; // this doesn't work for some reason
 
           message.channel.send(
-            "deleting " + init.name + " from commands directory"
+            "deleting " + init.name + " from custom commands directory"
           );
           fs.unlink(`${commandspath}/${init.name}.js`, (err) => {
             if (err) {
               message.channel.send(`error. please check logs for details`);
               console.log(err);
             } else {
+              delete require.cache[
+                require.resolve(`../custom/${args[0]}.json`)
+              ];
               message.channel.send(
                 `**uninstalled ${init.name}!** please restart reina now.`
               );
@@ -36,13 +39,13 @@ module.exports = {
             }
           });
         } else {
-          const init = require(`../commands/${args[0]}.json`);
-          const commandspath = path.join(__dirname, "..", "commands");
+          const init = require(`../custom/${args[0]}.json`);
+          const commandspath = path.join(__dirname, "..", "custom");
 
           delete require.cache[require.resolve(`./${init.name}.js`)];
 
           message.channel.send(
-            "deleting " + init.name + " from commands directory"
+            "deleting " + init.name + " from custom commands directory"
           );
           fs.unlink(`${commandspath}/${init.name}.js`, (err) => {
             if (err) {
@@ -62,6 +65,7 @@ module.exports = {
             console.log(data.toString());
           });
           deps.on("exit", function () {
+            delete require.cache[require.resolve(`../custom/${args[0]}.json`)];
             message.channel.send(
               `**uninstalled ${init.name}!** please restart reina now.`
             );
