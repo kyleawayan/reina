@@ -25,7 +25,7 @@ if you are having issues, please refer to the—*work-in-progress*—[debugging 
 ## usage
 right now there are not many commands, but her "prefix" is `reina`. you could also use `rey` or `rei`. it's like speaking naturally to someone, so for example, a command can be `reina play niki` or `rei play niki`.
 
-please refer to the [wiki page](https://github.com/kyleawayan/reina/wiki/Commands) for a list of available commands. you can also list all the commands in discord by using `reina help`.
+please refer to the [wiki](https://github.com/kyleawayan/reina/wiki) for a list of available commands. you can also list all the commands in discord by using `reina help`.
 
 ## make your own commands
 reina uses [a dynamic command handler](https://discordjs.guide/command-handling/#individual-command-files), so it's very easy to make your own commands. you can do so by creating a module in a folder called `custom` (you may need to create the folder), say for example, `ping.js`. here's an example ping module:
