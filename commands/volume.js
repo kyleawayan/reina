@@ -1,7 +1,6 @@
 module.exports = {
   name: "volume",
   description: "change the volume of the music",
-  cooldown: 5,
   execute(message, args) {
     const { channel } = message.member.voice;
     if (!channel)
