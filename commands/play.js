@@ -15,6 +15,7 @@ module.exports = {
       if (message.member.voice.channel) {
         connection = await message.member.voice.channel.join();
         connection.voice.setSelfDeaf(true);
+        connection.on("debug", console.log);
         music();
       } else {
         message.channel.send(`you need to join a voice channel`);
