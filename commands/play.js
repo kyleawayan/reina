@@ -85,28 +85,34 @@ module.exports = {
           return;
         }
 
+        let writeStream = await ytdl(song.url, {
+          quality: "highestaudio",
+        }).pipe(fs.createWriteStream("file.webm", { flags: "w" }));
+
         message.channel.startTyping();
         const spinner = ora({
           text: `downloading ${song.title}`,
           color: "red",
         }).start();
 
+        await new Promise((done) => setTimeout(done, 2000));
+
+        let readStream = fs.createReadStream("file.webm");
+
         const dispatcher = connection
-          .play(ytdl(song.url, {   quality: "highestaudio"   }), {
-          
-          
-              highWaterMark: 50,
-          })
+          .play(readStream, { highWaterMark: 50 })
           .on("start", () => {
             spinner.stop();
           })
           .on("finish", () => {
             // from https://github.com/eritislami/evobot/blob/2b037d5bd5e7cd51d371ebef0a52659aa3946baf/include/play.js#L55-L65
             if (queue.loop) {
+              writeStream.end();
               let lastSong = queue.songs.shift();
               queue.songs.push(lastSong);
               play(queue.songs[0]);
             } else {
+              writeStream.end();
               queue.songs.shift();
               play(queue.songs[0]);
               message.client.user.setActivity(null);
