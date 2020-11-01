@@ -14,6 +14,7 @@ module.exports = {
     async function test() {
       if (message.member.voice.channel) {
         connection = await message.member.voice.channel.join();
+        connection.voice.setSelfDeaf(true);
         music();
       } else {
         message.channel.send(`you need to join a voice channel`);
@@ -84,22 +85,18 @@ module.exports = {
           return;
         }
 
-        // let writeStream = await ytdl(song.url).pipe(
-        //   fs.createWriteStream("file.webm", { flags: "w" })
-        // );
-
         message.channel.startTyping();
         const spinner = ora({
           text: `downloading ${song.title}`,
           color: "red",
         }).start();
 
-        // await new Promise((done) => setTimeout(done, 1000));
-
-        // let readStream = fs.createReadStream("file.webm");
-
         const dispatcher = connection
-          .play(ytdl(song.url))
+          .play(ytdl(song.url, {   quality: "highestaudio"   }), {
+          
+          
+              highWaterMark: 50,
+          })
           .on("start", () => {
             spinner.stop();
           })
