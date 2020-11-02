@@ -1,7 +1,6 @@
 const yts = require("yt-search");
 const ytdl = require("ytdl-core");
 const fs = require("fs");
-const ora = require("ora");
 const { Util } = require("discord.js");
 
 module.exports = {
@@ -14,6 +13,7 @@ module.exports = {
     async function test() {
       if (message.member.voice.channel) {
         connection = await message.member.voice.channel.join();
+        connection.voice.setSelfDeaf(true);
         music();
       } else {
         message.channel.send(`you need to join a voice channel`);
@@ -84,25 +84,18 @@ module.exports = {
           return;
         }
 
-        let writeStream = await ytdl(song.url).pipe(
-          fs.createWriteStream("file.webm", { flags: "w" })
-        );
+        let writeStream = await ytdl(song.url, {
+          quality: "highestaudio",
+        }).pipe(fs.createWriteStream("file.webm", { flags: "w" }));
 
         message.channel.startTyping();
-        const spinner = ora({
-          text: `downloading ${song.title}`,
-          color: "red",
-        }).start();
 
-        await new Promise((done) => setTimeout(done, 1000));
+        await new Promise((done) => setTimeout(done, 2000));
 
         let readStream = fs.createReadStream("file.webm");
 
         const dispatcher = connection
-          .play(readStream)
-          .on("start", () => {
-            spinner.stop();
-          })
+          .play(readStream, { highWaterMark: 50 })
           .on("finish", () => {
             // from https://github.com/eritislami/evobot/blob/2b037d5bd5e7cd51d371ebef0a52659aa3946baf/include/play.js#L55-L65
             if (queue.loop) {
