@@ -41,7 +41,7 @@ module.exports = {
           const init = require(`../custom/${args[0]}.json`);
           const commandspath = path.join(__dirname, "..", "custom");
 
-          delete require.cache[require.resolve(`./${init.name}.js`)];
+          delete require.cache[require.resolve(`../custom/${init.name}.js`)];
 
           message.channel.send(
             "deleting " + init.name + " from custom commands directory"
