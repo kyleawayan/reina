@@ -1,6 +1,6 @@
 {
   "name": "reina",
-  "version": "0.3.8",
+  "version": "0.4.0",
   "description": "the minimal discord bot",
   "main": "index.js",
   "scripts": {
@@ -16,14 +16,13 @@
   "license": "ISC",
   "dependencies": {
     "@discordjs/opus": "^0.3.3",
+    "discord-player": "^3.2.0",
     "discord.js": "^12.5.1",
     "dotenv": "^8.2.0",
     "git-clone": "^0.1.0",
     "i18n": "^0.13.2",
     "nodemon": "^2.0.6",
-    "ora": "^5.1.0",
-    "yt-search": "^2.5.1",
-    "ytdl-core": "^3.4.2"
+    "ora": "^5.1.0"
   },
   "repository": {
     "type": "git",

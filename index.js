@@ -9,11 +9,13 @@ if (process.env.discord == "" || process.env.discord == undefined) {
   process.exit();
 }
 const Discord = require("discord.js");
+const { Player } = require("discord-player");
 const i18n = require("i18n");
 const locale = require(`./locales/en.json`);
 const ora = require("ora");
-const MusicClient = require("./struct/Client");
-const client = new MusicClient();
+const client = new Discord.Client();
+const player = new Player(client);
+client.player = player;
 var pjson = require("./package.json");
 const fs = require("fs");
 client.commands = new Discord.Collection();
@@ -42,11 +44,16 @@ fs.access("./custom", (err) => {
     for (const file of customCommandFiles) {
       const command = require(`./custom/${file}`);
       client.commands.set(command.name, command);
-      spinner.text = `loaded ${command.name}`;
+      // for some reason, if discord.js takes some time connecting to discord,
+      // the ora loading spinner never reaches lines 55 and 56.
+      // so i just placed the "connecting to discord" stuff here
+      //
+      // spinner.text = `loaded ${command.name}`;
+      spinner.color = "yellow";
+      spinner.text = "connecting to discord";
     }
   }
 });
-
 
 spinner.color = "yellow";
 spinner.text = "connecting to discord";
@@ -102,7 +109,7 @@ client.on("message", (message) => {
   if (!command) return;
 
   try {
-    client.commands.get(command.name).execute(message, args);
+    client.commands.get(command.name).execute(message, args, client);
   } catch (error) {
     console.error(error);
     message.reply("there was an error trying to execute that command!");
@@ -126,7 +133,7 @@ client.on("message", (message) => {
   if (!command) return;
 
   try {
-    client.commands.get(command.name).execute(message, args);
+    client.commands.get(command.name).execute(message, args, client);
   } catch (error) {
     console.error(error);
     message.reply("there was an error trying to execute that command!");
@@ -150,10 +157,58 @@ client.on("message", (message) => {
   if (!command) return;
 
   try {
-    client.commands.get(command.name).execute(message, args);
+    client.commands.get(command.name).execute(message, args, client);
   } catch (error) {
     console.error(error);
     message.reply("there was an error trying to execute that command!");
+  }
+});
+
+client.player.on("trackStart", (message, track) =>
+  message.client.user.setActivity(track.title, { type: "LISTENING" })
+);
+
+client.player.on("queueEnd", (message, track) =>
+  message.client.user.setActivity(null)
+);
+
+client.player.on("botDisconnect", (message, track) =>
+  message.client.user.setActivity(null)
+);
+
+client.player.on(
+  "searchInvalidResponse",
+  (message, query, tracks, content, collector) =>
+    message.channel.send(
+      `you must send a valid number between 1 and ${tracks.length}!`
+    )
+);
+
+client.player.on("searchCancel", (message, query, tracks) =>
+  message.channel.send(
+    "you did not provide a valid response... please send the command again!"
+  )
+);
+
+client.player.on("noResults", (message, query) =>
+  message.channel.send(`no results found on youtube for ${query}!`)
+);
+
+client.player.on("error", (error, message) => {
+  switch (error) {
+    case "NotPlaying":
+      message.channel.send("there is no music being played on this server!");
+      break;
+    case "NotConnected":
+      message.channel.send("you are not connected in any voice channel!");
+      break;
+    case "UnableToJoin":
+      message.channel.send(
+        "i am not able to join your voice channel, please check my permissions!"
+      );
+      break;
+    default:
+      message.channel.send(`something went wrong... ${error}`);
   }
 });
 
